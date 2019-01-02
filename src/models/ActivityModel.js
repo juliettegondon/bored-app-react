@@ -3,22 +3,22 @@ import { observable } from 'mobx'
 
 export default class ActivityModel {
   @observable
-  key: string
+  key: string = ''
 
   @observable
-  activity: string
+  activity: string = ''
 
   @observable
-  accessibility: number
+  accessibility: number = 0
 
   @observable
-  participants: number
+  participants: number = 0
 
   @observable
-  price: string
+  price: string = '0'
 
   @observable
-  type: string
+  type: string = 'education'
 
   constructor(attributes: {}) {
     Object.assign(this, attributes)

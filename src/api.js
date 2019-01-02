@@ -1,14 +1,10 @@
 //@flow
 import { API_URL } from './constants'
-import axios from 'axios'
+import axios from 'utilities/axios'
 
-const api = axios.create({
-  timeout: 1000
-})
-
-function printError(error: Error): Promise<*> {
+function printError(error: Error): Error {
   // console.error('api-error:', error)
-  return new Promise.reject(error)
+  return error
 }
 
 export default class Api {
@@ -20,7 +16,7 @@ export default class Api {
     participants?: number,
     type?: string
   ) => {
-    return api
+    return axios
       .get(API_URL, {
         params: {
           minaccessibility,
