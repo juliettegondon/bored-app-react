@@ -71,7 +71,7 @@ type Props = {
   onClick: () => *
 }
 
-export default class Activity extends React.PureComponent<Props> {
+export default class Button extends React.PureComponent<Props> {
   render() {
     const { onClick, children, className } = this.props
     return (

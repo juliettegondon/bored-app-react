@@ -1,45 +1,60 @@
 //@flow
 import { observable, action, computed } from 'mobx'
 import RootStore from '.'
+import type { FilterParams } from 'api'
 import ActivityModel from 'models/ActivityModel'
 
 export default class ActivitiesStore {
   rootStore: RootStore
+  filter: FilterParams = {}
 
   @observable
-  activities: Array<ActivityModel> = []
+  currentActivity: ActivityModel
+
+  @observable
+  activities: Map<string, ActivityModel> = new Map()
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore
   }
 
-  @computed
+  /*@computed
   get lastActivity(): ActivityModel {
     if (this.activities.length <= 0) {
       this.fetchRandomActivity()
       return new ActivityModel({})
     }
     return this.activities.slice(-1)[0]
-  }
+  }*/
 
   @computed
   get archivedActivity(): Array<ActivityModel> {
-    if (this.activities.length <= 0) {
-      this.fetchRandomActivity()
-      return []
-    }
-    return this.activities.slice(0, this.activities.length - 1)
+    return [...this.activities].map(([k, v]) => v) // eslint-disable-line no-unused-vars
+  }
+
+  @action
+  setFilter = (filter: FilterParams) => {
+    this.filter = filter
+  }
+
+  @action
+  setCurrentActivity = (activity: ActivityModel) => {
+    this.currentActivity = activity
   }
 
   @action
   addActivity = (activity: ActivityModel) => {
-    this.activities = [...this.activities, activity]
+    this.activities.set(activity.key, activity)
   }
 
   fetchRandomActivity = (): Promise<*> => {
     const { api } = this.rootStore
-    return api.fetchActivity().then(({ data }) => {
-      this.addActivity(new ActivityModel(data))
+    return api.fetchActivity(this.filter).then(({ data }) => {
+      if (data.error) return console.log('[API Error]:', data.error) // eslint-disable-line no-console
+
+      const newActivity = new ActivityModel(data)
+      this.setCurrentActivity(newActivity)
+      this.addActivity(newActivity)
     })
   }
 }

@@ -38,18 +38,26 @@ type Props = {
 @inject('activitiesStore')
 @observer
 class NewActivity extends React.Component<Props> {
+  componentDidMount() {
+    this.props.activitiesStore.fetchRandomActivity()
+  }
+
+  handleFilterChange = (filter: {}) => {
+    this.props.activitiesStore.setFilter(filter)
+  }
+
   render() {
     const { activitiesStore } = this.props
     return (
       <StyledNewActivity>
-        {activitiesStore.lastActivity && (
-          <Activity activity={activitiesStore.lastActivity} />
+        {activitiesStore.currentActivity && (
+          <Activity activity={activitiesStore.currentActivity} />
         )}
         <StyledButtonContainer>
           <Button onClick={() => activitiesStore.fetchRandomActivity()}>
             NEW ACTIVITY
           </Button>
-          <Filters />
+          <Filters onFilterChange={activitiesStore.setFilter} />
         </StyledButtonContainer>
       </StyledNewActivity>
     )
