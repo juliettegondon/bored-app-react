@@ -1,8 +1,10 @@
 [ignore]
-.*/node_modules/
 .*/src/containers/App/index.jsx
 
 [include]
+
+[declarations]
+.*/node_modules/
 
 [libs]
 
