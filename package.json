@@ -9,7 +9,8 @@
     "build": "webpack --production",
     "lint": "eslint src",
     "flow": "flow",
-    "precommit": "npm run flow && npm run lint"
+    "precommit": "npm run flow && npm run lint",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
