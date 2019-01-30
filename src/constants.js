@@ -1,5 +1,5 @@
 //@flow
-export const API_URL: string = 'http://www.boredapi.com/api/activity/'
+export const API_URL: string = 'https://www.boredapi.com/api/activity/'
 
 export const ACTIVITY_TYPES: * = {
   EDUCATION: 'education',
