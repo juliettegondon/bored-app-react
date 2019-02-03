@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
 import Archive from 'containers/Archive'
 import NewActivity from 'containers/NewActivity'
+import React from 'react'
+import styled from 'styled-components'
 import { COLORS } from '../../constants'
 
 const StyledApp = styled.div`
@@ -12,10 +12,8 @@ const StyledApp = styled.div`
   height: 100%;
 `
 
-type Props = {}
-
-class App extends React.Component<Props> {
-  render() {
+class App extends React.Component<{}> {
+  public render() {
     return (
       <StyledApp>
         <Archive />

@@ -1,21 +1,19 @@
-//@flow
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
+  faArchive,
+  faBed,
+  faBriefcase,
+  faChevronLeft,
+  faCogs,
+  faGift,
   faGlassCheers,
   faGraduationCap,
-  faHiking,
-  faUsers,
   faHammer,
-  faGift,
-  faBed,
-  faMusic,
-  faBriefcase,
-  faCogs,
+  faHiking,
   faMoneyBillAlt,
+  faMusic,
   faUser,
-  faArchive,
-  faChevronLeft
+  faUsers
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(

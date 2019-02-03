@@ -1,8 +1,7 @@
-//@flow
+import { createSliderWithTooltip, Range } from 'rc-slider'
+import 'rc-slider/assets/index.css'
 import React from 'react'
 import styled from 'styled-components'
-import { Range, createSliderWithTooltip } from 'rc-slider'
-import 'rc-slider/assets/index.css'
 import { getHandleStyle, getTrackStyle } from './styles'
 
 const RangeWithTooltip = createSliderWithTooltip(Range)
@@ -12,14 +11,20 @@ const StyledFilterRange = styled.div`
   padding: 0 7px;
 `
 
-function percentFormatter(v: string) {
+function percentFormatter(v: string | number): React.ReactNode {
   return `${v} %`
 }
 
-type Props = { color?: string }
+interface IProps {
+  min?: number
+  max?: number
+  color?: string
+  defaultValue?: number[]
+  onAfterChange: (value: number[]) => void
+}
 
-export default class FilterRange extends React.PureComponent<Props> {
-  render() {
+export default class FilterRange extends React.PureComponent<IProps> {
+  public render() {
     const { color } = this.props
     return (
       <StyledFilterRange>

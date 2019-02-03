@@ -1,5 +1,4 @@
-//@flow
-import React, { type Node } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { COLORS } from '../../constants'
 
@@ -65,14 +64,14 @@ const StyledButton = styled.div`
   }
 `
 
-type Props = {
-  children?: Node,
-  className?: string,
-  onClick: () => *
+interface IProps {
+  children?: React.ReactNode
+  className?: string
+  onClick: () => void
 }
 
-export default class Button extends React.PureComponent<Props> {
-  render() {
+export default class Button extends React.PureComponent<IProps> {
+  public render() {
     const { onClick, children, className } = this.props
     return (
       <StyledButton className={className} onClick={onClick}>

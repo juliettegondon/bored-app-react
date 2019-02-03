@@ -1,8 +1,7 @@
-//@flow
-import React, { type Node } from 'react'
-import styled from 'styled-components'
-import ActivityModel from 'models/ActivityModel'
 import Activity from 'components/Activity'
+import ActivityModel from 'models/ActivityModel'
+import React from 'react'
+import styled from 'styled-components'
 
 const StyledArchivedActivitiesList = styled.div`
   display: flex;
@@ -15,16 +14,21 @@ const StyledActivity = styled(Activity)`
   font-size: 0.5em;
 `
 
-type Props = {
-  activities?: Array<ActivityModel>
+interface IProps {
+  activities?: ActivityModel[]
 }
 
-export default class ArchivedActivitiesList extends React.PureComponent<Props> {
-  renderArchivedActivity = (activity: ActivityModel, index: number): Node => (
+export default class ArchivedActivitiesList extends React.PureComponent<
+  IProps
+> {
+  public renderArchivedActivity = (
+    activity: ActivityModel,
+    index: number
+  ): React.ReactNode => (
     <StyledActivity key={`archived-${index}`} activity={activity} />
   )
 
-  render() {
+  public render() {
     const { activities } = this.props
     return (
       <StyledArchivedActivitiesList>

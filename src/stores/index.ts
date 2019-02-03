@@ -1,10 +1,9 @@
-//@flow
 import Api from 'api'
 import ActivitiesStore from './ActivitiesStore'
 
 export default class RootStore {
-  api: Api
-  activitiesStore: ActivitiesStore
+  public api: Api
+  public activitiesStore: ActivitiesStore
 
   constructor() {
     this.api = new Api()

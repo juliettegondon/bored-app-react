@@ -1,11 +1,10 @@
-//@flow
-import React, { type Node } from 'react'
-import styled from 'styled-components'
-import ReactTooltip from 'react-tooltip'
 import Icon from 'components/Icon'
 import MetaInfo from 'components/MetaInfo'
-import { ACTIVITY_ICONS, COLORS } from '../../constants'
 import ActivityModel from 'models/ActivityModel'
+import React from 'react'
+import ReactTooltip from 'react-tooltip'
+import styled from 'styled-components'
+import { ACTIVITY_ICONS, COLORS } from '../../constants'
 
 const StyledActivity = styled.div`
   position: relative;
@@ -63,17 +62,17 @@ const StyledParticipantsContainer = styled.div`
   }
 `
 
-type Props = {
-  activity: ActivityModel,
+interface IProps {
+  activity: ActivityModel
   className?: string
 }
 
-function capitalizeFirstLetter(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1)
+function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export default class Activity extends React.PureComponent<Props> {
-  renderParticipants = (): Node => {
+export default class Activity extends React.PureComponent<IProps> {
+  public renderParticipants = (): React.ReactNode => {
     const { activity } = this.props
     const renderedParticipants = []
     for (let i = 0; i < activity.participants; i++) {
@@ -82,7 +81,7 @@ export default class Activity extends React.PureComponent<Props> {
     return renderedParticipants
   }
 
-  render() {
+  public render() {
     const { activity, className } = this.props
     return (
       <StyledActivity className={className}>
@@ -95,7 +94,7 @@ export default class Activity extends React.PureComponent<Props> {
         </StyledParticipantsContainer>
         <StyledIconContainer>
           <Icon
-            data-tip={capitalizeFirstLetter(activity.type)}
+            data-tip={capitalize(activity.type)}
             icon={ACTIVITY_ICONS[activity.type]}
           />
         </StyledIconContainer>

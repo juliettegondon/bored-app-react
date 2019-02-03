@@ -1,19 +1,18 @@
-//@flow
 export const API_URL: string = 'https://www.boredapi.com/api/activity/'
 
-export const ACTIVITY_TYPES: * = {
-  EDUCATION: 'education',
-  RECREATIONAL: 'recreational',
-  SOCIAL: 'social',
-  DIY: 'diy',
+export const ACTIVITY_TYPES: any = {
+  BUSYWORK: 'busywork',
   CHARITY: 'charity',
   COOKING: 'cooking',
-  RELAXATION: 'relaxation',
+  DIY: 'diy',
+  EDUCATION: 'education',
   MUSIC: 'music',
-  BUSYWORK: 'busywork'
+  RECREATIONAL: 'recreational',
+  RELAXATION: 'relaxation',
+  SOCIAL: 'social'
 }
 
-export const ACTIVITY_ICONS: * = {
+export const ACTIVITY_ICONS: any = {
   [ACTIVITY_TYPES.EDUCATION]: 'graduation-cap',
   [ACTIVITY_TYPES.RECREATIONAL]: 'hiking',
   [ACTIVITY_TYPES.SOCIAL]: 'users',
@@ -25,10 +24,10 @@ export const ACTIVITY_ICONS: * = {
   [ACTIVITY_TYPES.BUSYWORK]: 'briefcase'
 }
 
-export const COLORS: * = {
-  highlighted: '#FFFFA5',
+export const COLORS: any = {
   dark: '#413C58',
-  greenLight: '#56E39F',
   greenDark: '#59C9A5',
+  greenLight: '#56E39F',
+  highlighted: '#FFFFA5',
   red: '#EF6F6C'
 }

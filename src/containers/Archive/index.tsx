@@ -1,11 +1,10 @@
-//@flow
-import React from 'react'
-import { observable, action } from 'mobx'
-import { inject, observer } from 'mobx-react'
-import styled from 'styled-components'
-import ActivitiesStore from 'stores/ActivitiesStore'
-import Icon from 'components/Icon'
 import ArchivedActivitiesList from 'components/ArchivedActivitiesList'
+import Icon from 'components/Icon'
+import { action, observable } from 'mobx'
+import { inject, observer } from 'mobx-react'
+import React from 'react'
+import ActivitiesStore from 'stores/ActivitiesStore'
+import styled from 'styled-components'
 import { COLORS } from '../../constants'
 
 const StyledArchive = styled.div``
@@ -19,7 +18,7 @@ const StyledArchiveActivities = styled.div`
   overflow: scroll;
 `
 
-const StyledIcon = styled(Icon)`
+const StyledIcon = styled(({ component, ...props }) => <Icon {...props} />)`
   margin-left: 0.3em;
   margin-top: 0.3em;
   font-size: 3em;
@@ -49,40 +48,37 @@ const StyledArchivedActivities = styled.div`
   padding-top: 0.5em;
 `
 
-type Props = {
-  activitiesStore: ActivitiesStore
+interface IProps {
+  activitiesStore?: ActivitiesStore
 }
 
 @inject('activitiesStore')
 @observer
-class Activity extends React.Component<Props> {
+class Activity extends React.Component<IProps> {
   @observable
-  showActivities: boolean = false
+  public showActivities: boolean = false
 
   @action
-  toogleShowActivities = () => {
+  public toogleShowActivities = () => {
     this.showActivities = !this.showActivities
   }
 
-  render() {
+  public render() {
     const { activitiesStore } = this.props
     return (
       <StyledArchive>
         {!this.showActivities && (
-          <StyledIcon
-            icon="archive"
-            onClick={() => this.toogleShowActivities()}
-          />
+          <StyledIcon icon="archive" onClick={this.toogleShowActivities} />
         )}
         {this.showActivities && (
           <StyledArchiveActivities>
-            <StyledTitle onClick={() => this.toogleShowActivities()}>
+            <StyledTitle onClick={this.toogleShowActivities}>
               <span>Archived Activities</span>
               <Icon icon="chevron-left" />
             </StyledTitle>
             <StyledArchivedActivities>
               <ArchivedActivitiesList
-                activities={activitiesStore.archivedActivity}
+                activities={activitiesStore!.archivedActivity}
               />
             </StyledArchivedActivities>
           </StyledArchiveActivities>

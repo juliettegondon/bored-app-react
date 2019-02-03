@@ -1,13 +1,12 @@
-//@flow
-import { API_URL } from './constants'
 import axios from 'utilities/axios'
+import { API_URL } from './constants'
 
-export type FilterParams = {
-  minaccessibility?: number,
-  maxaccessibility?: number,
-  minprice?: number,
-  maxprice?: number,
-  participants?: number,
+export interface IFilterParams {
+  minaccessibility?: number
+  maxaccessibility?: number
+  minprice?: number
+  maxprice?: number
+  participants?: number
   type?: string
 }
 
@@ -17,7 +16,7 @@ function printError(error: Error): Error {
 }
 
 export default class Api {
-  fetchActivity = (params: FilterParams) => {
+  public fetchActivity = (params: IFilterParams) => {
     return axios.get(API_URL, { params }).catch(printError)
   }
 }

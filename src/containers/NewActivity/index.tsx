@@ -1,11 +1,10 @@
-//@flow
-import React from 'react'
-import { inject, observer } from 'mobx-react'
-import styled from 'styled-components'
 import Activity from 'components/Activity'
 import Button from 'components/Button'
 import Filters from 'components/Filters'
+import { inject, observer } from 'mobx-react'
+import React from 'react'
 import ActivitiesStore from 'stores/ActivitiesStore'
+import styled from 'styled-components'
 
 const StyledNewActivity = styled.div`
   display: flex;
@@ -31,33 +30,34 @@ const StyledButtonContainer = styled.div`
   }
 `
 
-type Props = {
-  activitiesStore: ActivitiesStore
+interface IProps {
+  activitiesStore?: ActivitiesStore
 }
 
 @inject('activitiesStore')
 @observer
-class NewActivity extends React.Component<Props> {
-  componentDidMount() {
-    this.props.activitiesStore.fetchRandomActivity()
+class NewActivity extends React.Component<IProps> {
+  public componentDidMount() {
+    this.props.activitiesStore!.fetchRandomActivity()
   }
 
-  handleFilterChange = (filter: {}) => {
-    this.props.activitiesStore.setFilter(filter)
+  public handleFilterChange = (filter: {}) => {
+    this.props.activitiesStore!.setFilter(filter)
   }
 
-  render() {
+  public render() {
     const { activitiesStore } = this.props
     return (
       <StyledNewActivity>
-        {activitiesStore.currentActivity && (
-          <Activity activity={activitiesStore.currentActivity} />
+        {activitiesStore!.currentActivity && (
+          <Activity activity={activitiesStore!.currentActivity} />
         )}
         <StyledButtonContainer>
-          <Button onClick={() => activitiesStore.fetchRandomActivity()}>
+          {/* tslint:disable-next-line:jsx-no-lambda */}
+          <Button onClick={() => activitiesStore!.fetchRandomActivity()}>
             NEW ACTIVITY
           </Button>
-          <Filters onFilterChange={activitiesStore.setFilter} />
+          <Filters onFilterChange={activitiesStore!.setFilter} />
         </StyledButtonContainer>
       </StyledNewActivity>
     )

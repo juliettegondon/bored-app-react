@@ -1,7 +1,6 @@
-//@flow
+import Icon from 'components/Icon'
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import Icon from 'components/Icon'
 
 const StyledMetaInfo = styled.div`
   position: relative;
@@ -37,7 +36,10 @@ const StyledSvgContainer = styled.div`
   height: 100%;
 `
 
-const StyledSvg = styled.svg`
+const StyledSvg = styled.svg<{
+  progressColor: string
+  progressPercentage: number
+}>`
   & .backgroundCircle {
     fill: none;
     stroke: rgba(0, 0, 0, 0.2);
@@ -63,16 +65,16 @@ const fill = (progress: number | string) => keyframes`
   }
 `
 
-type Props = {
-  label?: string,
-  icon?: string,
-  value?: number | string,
-  progress?: number | string,
-  progressColor?: string
+interface IProps {
+  label?: string
+  icon?: any
+  value?: number | string
+  progress: number | string
+  progressColor: string
 }
 
-export default class MetaInfo extends React.PureComponent<Props> {
-  render() {
+export default class MetaInfo extends React.PureComponent<IProps> {
+  public render() {
     const { label, progress, progressColor, value, icon } = this.props
     const progressPercentage = Math.round(Number(progress) * 100)
 

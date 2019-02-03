@@ -1,24 +1,23 @@
-//@flow
 import { observable } from 'mobx'
 
 export default class ActivityModel {
   @observable
-  key: string = ''
+  public key: string = ''
 
   @observable
-  activity: string = ''
+  public activity: string = ''
 
   @observable
-  accessibility: number = 0
+  public accessibility: number = 0
 
   @observable
-  participants: number = 0
+  public participants: number = 0
 
   @observable
-  price: string = '0'
+  public price: string = '0'
 
   @observable
-  type: string = 'education'
+  public type: string = 'education'
 
   constructor(attributes: {}) {
     Object.assign(this, attributes)

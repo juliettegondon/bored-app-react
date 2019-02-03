@@ -1,11 +1,10 @@
-//@flow
+import { action, observable } from 'mobx'
 import React from 'react'
-import { observable, action } from 'mobx'
 import styled from 'styled-components'
 import { COLORS } from '../../constants'
-import TypeSelect from './TypeSelect'
 import Range from './Range'
 import Slider from './Slider'
+import TypeSelect from './TypeSelect'
 
 const StyledFilters = styled.div`
   padding: 0.8em;
@@ -26,34 +25,34 @@ const StyledFilterLabel = styled.span`
   color: ${COLORS.highlighted};
 `
 
-type Props = {
+interface IProps {
   onFilterChange: (filter: {}) => void
 }
 
-export default class Filters extends React.PureComponent<Props> {
-  @observable filter: {} = {}
+export default class Filters extends React.PureComponent<IProps> {
+  @observable public filter: {} = {}
 
   @action
-  setFilter = (newFilterProps: {}) => {
+  public setFilter = (newFilterProps: {}) => {
     this.filter = { ...this.filter, ...newFilterProps }
     this.props.onFilterChange(this.filter)
   }
 
-  handlePriceChange = (price: Array<number>) => {
+  public handlePriceChange = (price: number[]) => {
     this.setFilter({
-      minprice: price[0] / 100,
-      maxprice: price[1] / 100
+      maxprice: price[1] / 100,
+      minprice: price[0] / 100
     })
   }
 
-  handleAccesibilityChange = (accesibility: Array<number>) => {
+  public handleAccesibilityChange = (accesibility: number[]) => {
     this.setFilter({
-      minaccesibility: accesibility[0] / 100,
-      maxaccesibility: accesibility[1] / 100
+      maxaccesibility: accesibility[1] / 100,
+      minaccesibility: accesibility[0] / 100
     })
   }
 
-  handleParticipantsChange = (participants: number) => {
+  public handleParticipantsChange = (participants: number) => {
     if (participants === 0) {
       this.setFilter({ participants: null })
       return
@@ -61,7 +60,7 @@ export default class Filters extends React.PureComponent<Props> {
     this.setFilter({ participants })
   }
 
-  handleTypeChange = (value: { value: string, label: string }) => {
+  public handleTypeChange = (value: { value: string; label: string }) => {
     if (!value) {
       this.setFilter({ type: null })
       return
@@ -69,7 +68,7 @@ export default class Filters extends React.PureComponent<Props> {
     this.setFilter({ type: value.value })
   }
 
-  render() {
+  public render() {
     return (
       <StyledFilters>
         <StyledFilter>
